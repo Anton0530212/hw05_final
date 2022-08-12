@@ -26,14 +26,14 @@ class Post(models.Model):
                                related_name='posts')
     group = models.ForeignKey(Group, on_delete=models.SET_NULL,
                               related_name='posts', blank=True, null=True,)
-    image = models.ImageField('Картинка', upload_to='posts/', blank=True)  
+    image = models.ImageField('Картинка', upload_to='posts/', blank=True)
 
     def __str__(self):
         return self.text[:15]
 
 
 class Meta:
-    ordering = ['-pub_date',]
+    ordering = ['-pub_date'],
 
 
 class Comment(models.Model):
@@ -62,3 +62,4 @@ class Follow(models.Model):
                 fields=['user', 'author'],
                 name='unique_pairs'),
         ]
+        
