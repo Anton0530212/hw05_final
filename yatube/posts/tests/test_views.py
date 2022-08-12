@@ -17,7 +17,6 @@ TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 User = get_user_model()
 
 
-
 class PostURLTests(TestCase):
     @classmethod
     def setUpClass(cls):
@@ -41,7 +40,7 @@ class PostURLTests(TestCase):
             slug='ts',
             description='Тестовое описание',
         )
-        
+
         cls.posts = Post.objects.create(author=cls.testuser,
                                         text='Тестовый пост',
                                         group=cls.group,
@@ -126,7 +125,7 @@ class PostURLTests(TestCase):
         posts = response.context['post']
         self.assertEqual(posts.text, PostURLTests.posts.text)
         self.assertEqual(posts.image, PostURLTests.posts.image)
-    
+
     def test_follow_view_adds_followers(self):
         """"Подписка на авторов работает корректно."""
 
@@ -172,7 +171,6 @@ class PostURLTests(TestCase):
                     kwargs={'username': self.user})
         )
 
-
     def test_unfollow_view_removes_followers(self):
         """"Отписка от авторов работает корректно."""
         test_author = User.objects.create(username='test_auth2')
@@ -187,8 +185,8 @@ class PostURLTests(TestCase):
         self.assertFalse((
             Follow.objects.filter(author=test_author, user=self.user)),
             exists)
-        
-        
+
+
 class PiginatorViewsTest(TestCase):
     @classmethod
     def setUpClass(cls):
@@ -241,6 +239,3 @@ class PiginatorViewsTest(TestCase):
             reverse('posts:follow_index')
         )
         self.assertEqual(len(response.context['page_obj']), 0)
-
-
-   
