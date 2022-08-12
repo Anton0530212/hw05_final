@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 def page_not_found(request, exception):
     template = 'core/404.html'
-    # Переменная exception содержит отладочную информацию, 
+    # Переменная exception содержит отладочную информацию,
     # выводить её в шаблон пользователской страницы 404 мы не станем
     return render(request, template, {'path': request.path}, status=404)
 

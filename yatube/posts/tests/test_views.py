@@ -1,14 +1,12 @@
 import shutil
 import tempfile
 
-from http import HTTPStatus
 from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase
 from django.urls import reverse
 from posts.forms import PostForm
-from django import forms
 from django.core.cache import cache
 from genericpath import exists
 

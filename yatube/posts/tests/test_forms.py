@@ -4,7 +4,7 @@ from django.urls import reverse
 from http import HTTPStatus
 
 from ..forms import PostForm
-from ..models import Group, Post
+from ..models import Group, Post, Comment
 
 
 User = get_user_model()
@@ -88,7 +88,8 @@ class PostURLTests(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(summ, summ)
         response_2 = self.author_client.get(reverse('posts:post_detail',
-                                                kwargs={'post_id': 1}))
-        self.assertEqual(response_2.context.get('comments').text, 'Замена текста')
+                                            kwargs={'post_id': 1}))
+        self.assertEqual(response_2.context.get('comments').text,
+                         'Замена текста')
         self.assertEqual(response_2.context.get('comments').author,
                          self.user)

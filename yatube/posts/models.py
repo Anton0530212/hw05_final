@@ -62,4 +62,3 @@ class Follow(models.Model):
                 fields=['user', 'author'],
                 name='unique_pairs'),
         ]
-        
