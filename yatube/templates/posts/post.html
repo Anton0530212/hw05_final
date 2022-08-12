@@ -1,0 +1,6 @@
+<ul>
+  <li>Автор: {{ post.author }}</li>
+  <a href="{% url 'posts:profile' post.author.username %}">все посты пользователя</a>
+  <li>Дата публикации: {{ post.pub_date|date:"d M Y" }}</li>
+</ul>
+<p>{{ post.text|linebreaksbr }}</p>
