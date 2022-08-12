@@ -81,7 +81,6 @@ class PostURLTests(TestCase):
                 self.assertTemplateUsed(response, template)
 
     def test_context_post_edit(self):
-        posts = self.posts
         url = (reverse('posts:post_edit', kwargs={'post_id': self.posts.id}))
         response = self.authorized_client.get(url)
         form = response.context['form']
