@@ -238,3 +238,33 @@ class PiginatorViewsTest(TestCase):
             reverse('posts:follow_index')
         )
         self.assertEqual(len(response.context['page_obj']), 0)
+
+    # def test_cache_home_page(self):
+    #     response_one = self.client.get(reverse('posts:index'))
+    #     object_index_one = response_one.context
+    #     one_post = Post.objects.filter(id=2)
+    #     one_post.delete()
+    #     response_two = self.client.get(reverse('posts:index'))
+    #     object_index_two = response_two.context
+    #     self.assertEquals(object_index_one, object_index_two)
+    #     cache.clear()
+    #     response_three = self.client.get(reverse('posts:index'))
+    #     object_index_three = response_three.context
+    #     self.assertEqual(object_index_three, object_index_one)
+
+    def test_cache_index_page(self):
+        """Проверяем что главная страница кешируется на 20 секунд."""
+        Post.objects.create(
+            text='Текст тестировки кэша',
+            author=self.user,
+        )
+        response_one = self.authorized_client.get(reverse('posts:index'))
+        Post.objects.create(
+            text='Текст тестировки кэша',
+            author=self.user,
+        )
+        response_two = self.authorized_client.get(reverse('posts:index'))
+        self.assertEqual(response_one.content, response_two.content)
+        cache.clear()
+        response_three = self.authorized_client.get(reverse('posts:index'))
+        self.assertNotEqual(response_one.content, response_three.content)

@@ -10,7 +10,7 @@ from .models import Post, Group, User, Comment, Follow
 POSTS_PER_PAGE = 10
 
 
-@cache_page(20, key_prefix='index_page')
+@cache_page(10, key_prefix='index_page')
 def index(request):
     posts = Post.objects.select_related('author', 'group').all()
     paginator = Paginator(posts, POSTS_PER_PAGE)
