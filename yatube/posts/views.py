@@ -1,14 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.decorators.cache import cache_page
 
 from posts.forms import PostForm, CommentForm
 
 from .models import Post, Group, User, Comment, Follow
 
 POSTS_PER_PAGE = 10
-
 
 
 def index(request):
