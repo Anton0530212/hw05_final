@@ -253,7 +253,6 @@ class PiginatorViewsTest(TestCase):
         response_two = self.authorized_client.get(reverse('posts:index'))
         self.assertEqual(response_one.content, response_two.content)
         cache.clear()
-        
+
         response_three = self.authorized_client.get(reverse('posts:index'))
         self.assertNotEqual(response_one.content, response_three.content)
-        
